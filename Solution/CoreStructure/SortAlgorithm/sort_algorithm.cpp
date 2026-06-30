@@ -1,4 +1,4 @@
-#include "sorting_algorithm.h"
+#include "sort_algorithm.h"
 
 #include "../../trie_node.h"
 
@@ -10,12 +10,12 @@
 // Requirement: Sort the Match array prioritizing ascending 'start'.
 // If 'start' are equal, prioritize descending 'end'.
 // Strictly DO NOT use the <algorithm> library (std::sort).
-void swapMatch(Match& a, Match& b) {
+void swapMatch(Match &a, Match &b) {
   Match temp = a;
   a = b;
   b = temp;
 }
-int partitionLomuto(Match* arr, int left, int right) {
+int partitionLomuto(Match *arr, int left, int right) {
   if (left >= right) {
     return left;
   }
@@ -36,7 +36,7 @@ int partitionLomuto(Match* arr, int left, int right) {
   swapMatch(arr[i + 1], arr[right]);
   return i + 1;
 }
-void quickSort(Match* arr, int left, int right) {
+void quickSort(Match *arr, int left, int right) {
   if (left >= right) {
     return;
   }
@@ -45,4 +45,4 @@ void quickSort(Match* arr, int left, int right) {
   quickSort(arr, left, p - 1);
   quickSort(arr, p + 1, right);
 }
-void sortMatches(Match* arr, int count) { quickSort(arr, 0, count - 1); }
+void sortMatches(Match *arr, int count) { quickSort(arr, 0, count - 1); }

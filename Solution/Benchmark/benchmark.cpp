@@ -8,7 +8,7 @@
 #include <sstream>
 #include <string>
 
-#include "../CoreStructure/Building/building.h"
+#include "../CoreStructure/Build/build.h"
 #include "../CoreStructure/TrieMemoryManagement/trie_memory_management.h"
 #include "../SearchEngines/search_engines.h"
 #include "../global_variables.h"

@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "../CoreStructure/Building/building.h"
-#include "../CoreStructure/SortingAlgorithm/sorting_algorithm.h"
+#include "../CoreStructure/Build/build.h"
+#include "../CoreStructure/SortAlgorithm/sort_algorithm.h"
 #include "../global_variables.h"
 
 using namespace std;
@@ -15,7 +15,7 @@ using namespace std;
 
 // TODO 6: Naive approach. Use 2 nested loops or std::string::find to find and
 // mask with '*'
-void naiveSearch(const vector<string>& dict, string& text) {
+void naiveSearch(const vector<string> &dict, string &text) {
   int n = text.size();
 
   for (int k = 0; k < dict.size(); k++) {
@@ -42,10 +42,10 @@ void naiveSearch(const vector<string>& dict, string& text) {
 
 // TODO 7: Traverse the text using the Trie. Need to implement backtracking
 // logic when matching fails in the middle of a phrase.
-void trieSearch(TrieNode* root, string& text) {
+void trieSearch(TrieNode *root, string &text) {
   for (int i = 0; i < text.size(); i++) {
     int j = i;
-    TrieNode* current = root;
+    TrieNode *current = root;
     while (j < text.size() && findChild(current, text[j])) {
       current = findChild(current, text[j]);
       if (current->is_end_of_word) {
@@ -61,11 +61,11 @@ void trieSearch(TrieNode* root, string& text) {
 // TODO 8: Traverse the text using an optimized Trie with Maximal Munch
 // (Greedy). When the longest phrase starting at position i is masked, the
 // iterator i is allowed to jump.
-void trieMaximalMunchSearch(TrieNode* root, string& text) {
+void trieMaximalMunchSearch(TrieNode *root, string &text) {
   for (int i = 0; i < text.size();) {
     int longestEnd = -1;
     int j = i;
-    TrieNode* current = root;
+    TrieNode *current = root;
     while (j < text.size() && findChild(current, text[j])) {
       current = findChild(current, text[j]);
       if (current->is_end_of_word) {
@@ -95,11 +95,11 @@ void trieMaximalMunchSearch(TrieNode* root, string& text) {
 //    then mask with '*' and update last_end = match[i].end. Otherwise skip it
 //    because it is overlapped).
 // - Execute the '*' masking and free the memory of the Match* array.
-void ahoCorasickSearch(TrieNode* root, string& text) {
-  Match* matches = new Match[OVERLAPPING_MAX];
+void ahoCorasickSearch(TrieNode *root, string &text) {
+  Match *matches = new Match[OVERLAPPING_MAX];
   int matchSize = 0;
 
-  TrieNode* current = root;
+  TrieNode *current = root;
   for (int i = 0; i < text.size(); i++) {
     char c = text[i];
 
@@ -107,14 +107,14 @@ void ahoCorasickSearch(TrieNode* root, string& text) {
       current = current->fail_link;
     }
 
-    TrieNode* match = findChild(current, c);
+    TrieNode *match = findChild(current, c);
     if (match == nullptr) {
       current = root;
     } else {
       current = match;
     }
 
-    TrieNode* temp = current;
+    TrieNode *temp = current;
     while (temp != nullptr && temp != root) {
       if (temp->is_end_of_word) {
         matches[matchSize].start = i - temp->word_length + 1;

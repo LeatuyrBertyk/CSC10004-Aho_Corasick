@@ -1,4 +1,4 @@
-#include "building.h"
+#include "build.h"
 
 #include <queue>
 #include <string>
@@ -14,16 +14,16 @@ using namespace std;
 
 // TODO 4: Insert a word into the Trie using linked lists (first_child,
 // next_sibling)
-void insertWord(TrieNode* root, const string& word) {
-  TrieNode* current = root;
+void insertWord(TrieNode *root, const string &word) {
+  TrieNode *current = root;
 
   for (char c : word) {
     if (current->first_child == nullptr) {
       current->first_child = createNode(c);
       current = current->first_child;
     } else {
-      TrieNode* child = current->first_child;
-      TrieNode* prev = current->first_child;
+      TrieNode *child = current->first_child;
+      TrieNode *prev = current->first_child;
 
       while (child && child->character != c) {
         prev = child;
@@ -48,12 +48,12 @@ void insertWord(TrieNode* root, const string& word) {
 // of a children[256] array, you should write an auxiliary function `TrieNode*
 // findChild(TrieNode* node, char c)` to easily find the child node when
 // building fail_links.
-TrieNode* findChild(TrieNode* node, char c) {
+TrieNode *findChild(TrieNode *node, char c) {
   if (node == nullptr || node->first_child == nullptr) {
     return nullptr;
   }
 
-  for (TrieNode* child = node->first_child; child;
+  for (TrieNode *child = node->first_child; child;
        child = child->next_sibling) {
     if (child->character == c) {
       return child;
@@ -61,16 +61,16 @@ TrieNode* findChild(TrieNode* node, char c) {
   }
   return nullptr;
 }
-void buildFailureLinks(TrieNode* root) {
+void buildFailureLinks(TrieNode *root) {
   if (root == nullptr) {
     return;
   }
 
   root->fail_link = nullptr;
 
-  queue<TrieNode*> que;
+  queue<TrieNode *> que;
 
-  TrieNode* child = root->first_child;
+  TrieNode *child = root->first_child;
   while (child) {
     child->fail_link = root;
     que.push(child);
@@ -78,19 +78,19 @@ void buildFailureLinks(TrieNode* root) {
   }
 
   while (!que.empty()) {
-    TrieNode* current = que.front();
+    TrieNode *current = que.front();
     que.pop();
 
-    TrieNode* v = current->first_child;
+    TrieNode *v = current->first_child;
     while (v) {
       char c = v->character;
 
-      TrieNode* fallback = current->fail_link;
+      TrieNode *fallback = current->fail_link;
       while (fallback != root && findChild(fallback, c) == nullptr) {
         fallback = fallback->fail_link;
       }
 
-      TrieNode* match = findChild(fallback, c);
+      TrieNode *match = findChild(fallback, c);
       if (match == nullptr) {
         v->fail_link = root;
       } else {
