@@ -12,14 +12,15 @@ This system is engineered to perform efficient multi-pattern searching on massiv
 Solution/
 ├── main.cpp
 ├── trie_node.h
+|── global_variables.h
 ├── Benchmark/
 │   ├── benchmark.cpp
 │   └── benchmark.h
 ├── CoreStructure/
-│   ├── Building/
-│   ├── SortingAlgorithm/
-│   └── TrieMemoryManagement/
-└── SearchEngines/
+│   ├── Building/               # Build Trie and fail_links
+│   ├── SortingAlgorithm/       # Quick sort for matches
+│   └── TrieMemoryManagement/   # Manage Trie data stucture
+└── SearchEngines/              # 4 main search strategies
 Report.pdf
 ```
 
