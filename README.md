@@ -10,22 +10,23 @@ This system is engineered to perform efficient multi-pattern searching on massiv
 ## Repository Structure
 ```plaintext
 Solution/
-├── main.cpp              # Entry point & Benchmark suite
-├── trie_node.h           # Core data structures (TrieNode, Match)
+├── main.cpp
+├── trie_node.h
 ├── Benchmark/
-│   ├── benchmark.cpp     # Measurement & sampling tools
+│   ├── benchmark.cpp
 │   └── benchmark.h
 ├── CoreStructure/
-│   ├── Building/         # Trie construction & Failure link logic
-│   ├── SortingAlgorithm/ # Custom QuickSort for Match results
-│   └── TrieMemoryManagement/ # Dynamic memory allocation/cleanup
-└── SearchEngines/        # Implementations of the 4 search algorithms
+│   ├── Building/
+│   ├── SortingAlgorithm/
+│   └── TrieMemoryManagement/
+└── SearchEngines/
+Report.pdf
 ```
 
 ## Requirements
 To compile and run this project, the following environment is recommended:
 - **Compiler**: A `C++11` (later) compiler (e.g., `g++` or `clang++`).
-- **OS**: Linux-based system (Ubuntu 22.04+ recommended).
+- **OS**: Linux-based Ubuntu 22.04+ (recommended), Windows (10+), MacOS. 
 - **Data files**: `noise_sick_50k.txt` - dictionary of 50,000 noise patterns, and `clean_corpus.txt` - large input text corpus (millions of words).
 - **Storage**: SSD recommended for optimal performance.
 
@@ -40,7 +41,7 @@ To compile and run this project, the following environment is recommended:
    ```
 3. Execution:
    ```bash
-   .\engine.exe
+   ./engine.exe
    ```
 
 ## Benchmarking & Analysis
